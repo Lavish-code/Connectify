@@ -8,6 +8,7 @@ import {
   MenuList,
   Portal,
   Text,
+  useToast,
   VStack,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
@@ -16,7 +17,20 @@ import { CgMoreO } from "react-icons/cg";
 //we will store the items in vertical stack order
 
 const UserHeader = () => {
+    const toast = useToast()
+
+
     const copyURL =() =>{
+      const currentURL = window.location.href;
+      navigator.clipboard.writeText(currentURL).then(()=>{
+        toast({
+          title: 'Account created.',
+          description: "Profile Link Copied",
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+        })
+      })
         
     }
   return (
@@ -50,7 +64,7 @@ const UserHeader = () => {
           <Box w="1" h="1" bg={"gray.light"} borderRadius={"full"}></Box>
           <Link color={"gray.light"}>instagram.com</Link>
         </Flex>
-        <Flex alignItems="center">y
+        <Flex alignItems="center">
           <Box className="icon-container">
             <BsInstagram size={24} cursor={"pointer"} />
           </Box>
@@ -66,6 +80,14 @@ const UserHeader = () => {
               </MenuList>
             </Portal>
           </Menu>
+        </Flex>
+      </Flex>
+      <Flex w={"full"}>
+        <Flex flex={1} borderBottom={"1.5px solid white"} justifyContent={"center"} pb="3" cursor={"pointer"}>
+          <Text fontWeight={"bold"}> ConnectiFy</Text>
+        </Flex>
+        <Flex flex={1} borderBottom={"1px solid gray"} justifyContent={"center"} color={"gray.light"} pb="3" cursor={"pointer"}>
+          <Text fontWeight={"bold"}> Replies</Text>
         </Flex>
       </Flex>
     </VStack>
